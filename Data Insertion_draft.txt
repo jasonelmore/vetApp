@@ -1,0 +1,99 @@
+INSERT INTO vetClinic.Clinic (CLINIC_NUM, CLINIC_ADDRESS, CLINIC_CITY, CLINIC_STATE, CLINIC_ZIP, CLINIC_TEL, CLINIC_FAX, CLINIC_MANAGER)
+VALUES
+	(10006, "123 Ring Rd.", "Campbellsville", 'KY', "42718-7389", "(270) 403-8770", "(270) 403-8476", "Polly Carmichael"),
+    (10007, "4897 Paw Print Ln", "Hodgenville", 'KY', "42897-8547", "(270) 456-5747", "(270) 542-7874", "Justin Defree"),
+    (10008, "515 E. Main St.", "Bowlinggreen", 'KY', "56872-7815", "(502) 874-6523", "(502) 487-9631", "Elizabeth Shaw");
+
+INSERT INTO vetClinic.Staff (EMPLOYEE_ID, CLINIC_NUM, FIRST_NAME, LAST_NAME, STAFF_STREET, STAFF_CITY, STAFF_STATE, STAFF_ZIP, STAFF_PHONE, STAFF_DOB, STAFF_GENDER, STAFF_SSN, POSITION, SALARY)
+VALUES
+	(300215, 10006, "Jason", "Elmore", "8883 New Columbia Rd.", "Campbellsville", 'KY', "42718-7849", "(270) 403-8770", '1983-06-28', 'Male', "405282822", "Owner", 125000),
+    (300216, 10007, "Teresa", "Matney", "83 Hearth Stone Way.", "Greensburg", 'KY', "42738-7845", "(270) 403-8481", '1960-01-15', 'Female', "400797785", "Technician", 75000),
+    (300217, 10008, "Vince", "Scovetta", "123 Robot Rd.", "Disertation Dr.", 'NY', "87453-9832", "(502) 752-4563", '1955-04-23', 'Male', "401987423", "IT Support", 85479);
+
+INSERT INTO vetClinic.Pet_Owners (OWNER_ID, CLINIC_NUM, OWNER_FNAME, OWNER_LNAME, OWNER_ADDRESS, OWNER_CITY, OWNER_STATE, OWNER_ZIP, OWNER_PHONE, OWNER_BALANCE)
+VALUES
+		(500001, 10006, "Benjamin", "Elmore", "213 Twin Creek Dr.", "Campbellsville", 'KY', "42718-7849", "(270) 403-6960", 115.11),
+        (500002, 10007,	"Jeremy", "Garrett", "125 Linda Lane.", "Campbellsville", 'KY', "42718-7849", "(270) 403-9845", 62.50),
+        (500003, 10008, "Patricia",  "Cowherd",  "147 Hill Rd.", "Greensburg", 'KY', "42798-7845", "(270) 932-5886", 0.00);
+
+INSERT INTO vetClinic.Pets (PET_ID, OWNER_ID, PET_NAME, PET_TYPE, PET_DESCRIPTION, PET_DOB, REG_DATE, PET_STATUS)
+VALUES
+		(45008, 500001,	"Max", 'Dog', "Black Lab", '2008-06-15', '2010-06-01', 'Alive'),
+		(45009, 500002, "Sam", 'Cat', "Mixed Breed", '2012-09-15', '2015-03-21', 'Alive'),
+		(45010,	500003,	"Patches", 'Cat', "Persian", '2013-02-04', '2015-11-18', 'Alive');
+
+INSERT INTO vetClinic.Examinations (EXAM_NUM, PET_ID, EMPLOYEE_ID, EXAM_TIME, EXAM_DATE, EXAM_COMMENTS)
+VALUES    
+    (540, 45008, 300215, '11:50:00', '2022-01-25', "Yearly Shots and Examination"),
+    (541, 45009, 300216, '13:30:00', '2022-01-26', "Itchy Skin"),
+    (542, 45010, 300217, '08:00:00', '2022-01-27', "Bacterial Infection");
+    
+INSERT INTO vetClinic.Pens (PEN_ID, CLINIC_NUM, PEN_CAPACITY, PEN_STATUS)
+VALUES  
+		(1001, 10006, 4, 'Full'),
+        (1002, 10007, 4, 'Available'),
+        (1003, 10008, 1, 'Full');
+        
+INSERT INTO vetClinic.Pet_Treatments (TREATMENT_ID, EXAM_NUM, TREATMENT_DATE, TREATMENT_QTY, TREATMENT_DESC, TREATMENT_COST)
+VALUES    
+		(75001, 540, '2010-06-01', 4, "Penicillin anibiotic course", 35.00),
+        (75002,	541, '2015-03-21', 4, "Feline hysterectomy", 221.00),
+        (75003, 542, '2015-11-18', 1, "Vaccination course against feline flu", 125.00 );
+
+INSERT INTO vetClinic.Pharmacy (DRUG_NUM, CLINIC_NUM, DRUG_NAME, DRUG_DESC, SUPPLIER, ADMIN_METHOD, RX_COST, RX_UNIT_COST, DRUG_QTY, DRUG_REORDERLVL, DRUG_REORDERQTY)
+VALUES   
+		(490015, 10006, "Vetprophen 325mg", "Anti-inflammatory and pain releif", "AstraZenica", 'Oral', 49.56, 0.35, 241, 100, 500),
+        (490016, 10007, "Pennicillin", "Antibiotic", "TEVA", 'Injection', 79.85, 0.79, 528, 75, 1000),
+        (490017, 10008, "Morphine", "Surgical Pain Reliever", "Pfizer", 'Injection', 35, 5.00, 1098, 350, 2500);
+
+INSERT INTO vetClinic.Pen_Reservations (BOOKING_ID, PEN_ID, PET_ID, PEN_IN, PEN_OUT, PEN_COMMENTS)
+VALUES
+		(32145, 1001, 45008, '2023-03-23', '2023-03-24', "Dental Appointment"),
+        (32146,	1002, 45009, '2023-03-24', '2023-03-27', "Monitor and Assess"),
+        (32147,	1003, 45010, '2023-04-01', '2023-04-15', "Waiting for Surgery");
+
+INSERT INTO vetClinic.Appointments (APPT_NUM, PET_ID, CLINIC_NUM, APPT_DATE, APPT_TIME)
+VALUES
+		(255, 45008, 10006, '2023-03-23', '11:50:00'),
+        (256, 45009, 10007, '2023-03-24', '13:30:00'),
+        (257, 45010, 10008, '2023-04-01', '08:00:00');
+
+INSERT INTO vetClinic.Invoice (INVOICE_NUM, OWNER_ID, TREATMENT_ID, INVOICE_DATE, INVOICE_TOTAL, DATE_PAID, PYMT_METHOD)
+VALUES    
+		(45613, 500001, 75001, '2023-03-23', 125.21, '2023-05-01', 'Cash'),
+        (45785, 500002,	75002, '2023-03-24', 89.99, '2023-04-21', 'Credit'),
+        (45952, 500003, 75003, '2023-04-01', 452.17, '2023-04-25', 'Cash');
+        
+
+
+
+        
+
+
+
+
+
+
+
+
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
